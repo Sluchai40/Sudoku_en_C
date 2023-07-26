@@ -14,6 +14,7 @@ SRCS_RAW			:= mainu.c	\
 					celib_nu.c 	\
 					celib_cache.c 	\
 					segment.c 	\
+					segment_2.c 	\
 
 SRCS				:= $(SRCS_RAW:%.c=$(SRCS_DIR)/%.c)
 
@@ -32,7 +33,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 test: $(NAME)
-	$(NAME) sudokufile/sudoku_grill
+	$(NAME) sudoku_grill
 
 clean:
 	$(RM) $(OBJS)
