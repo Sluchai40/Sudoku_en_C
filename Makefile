@@ -1,44 +1,59 @@
-NAME			:= ./sudoku
+TARGET := sudoku
+CC := gcc
 
-SRCS_DIR			:= .
+SRCS_FOLDER := src
+INCLUDE_FOLDER := include
+PREREQUISITES_FOLDER := prerequisites
+OBJS_FOLDER := objs
+BIN_FOLDER := .
 
-SRCS_RAW			:= mainu.c	\
-					case_vide.c \
-					solver_Sudoku.c \
-					strsplit.c	\
-					test_chiffre.c	\
-					shuffle_range.c \
-					remove.c	\
-					gridass.c 	\
-					idiot_solver.c 	\
-					celib_nu.c 	\
-					celib_cache.c 	\
-					segment.c 	\
-					segment_2.c 	\
+SDL_INCLUDE := -I./include
 
-SRCS				:= $(SRCS_RAW:%.c=$(SRCS_DIR)/%.c)
+CFLAGS := -Wall -Wextra -flto -O3 -I$(INCLUDE_FOLDER) -I$(PREREQUISITES_FOLDER) -I$(SDL_INCLUDE) -MMD
+LDFLAGS := -L./lib/
 
-			
-OBJS			:= $(SRCS:.c=.o)
+SRCS_RAW := mainu.c	\
+			case_vide.c 	\
+			celib_cache.c 	\
+			celib_nu.c 	\
+			gridass.c 	\
+			idiot_solver.c 	\
+			mainu.c 	\
+			remove.c 	\
+			segment_2.c 	\
+			segment.c 	\
+			shuffle_range.c 	\
+			solver_Sudoku.c 	\
+			strsplit.c 	\
+			test_chiffre.c 	\
 
-CC			:= gcc
+SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
+OBJS := $(SRCS:$(SRCS_FOLDER)/%.c=$(OBJS_FOLDER)/%.o)
+DEPS := $(OBJS:.o=.d)
+PREREQUISITES := $(wildcard $(PREREQUISITES_FOLDER)/*.c)
 
-CFLAGS			:= -Wall -Wextra
+.PHONY: all clean re fclean test
 
-RM			:= rm -rf
+all: $(TARGET)
 
-all: $(NAME)
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN_FOLDER)/$@ $^ -lSDL2 -lSDL2_ttf
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(OBJS_FOLDER)/%.o: $(SRCS_FOLDER)/%.c | $(OBJS_FOLDER)
+	$(CC) $(CFLAGS) -c $< -o $@ -MMD -MF $(@:.o=.d)
 
-test: $(NAME)
-	$(NAME) sudoku_grill
+-include $(DEPS)
+
+$(OBJS_FOLDER):
+	mkdir -p $(OBJS_FOLDER)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(BIN_FOLDER)/$(TARGET)
 
 re: fclean all
+
+test: all
+	$(BIN_FOLDER)/$(TARGET) sudoku_grill
