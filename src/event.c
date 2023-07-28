@@ -32,7 +32,10 @@ void event (sudoku *sudoku_tab, int *isOpen)
                 }
                 if(events.key.keysym.scancode == SDL_SCANCODE_DELETE || events.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
                 {
+                    if (sudoku_tab -> grid[sudoku_tab -> posY][sudoku_tab -> posX] == 0)
+                    {
                     sudoku_tab -> grid[sudoku_tab -> posY_clicked][sudoku_tab -> posX_clicked] = 0;
+                    }
                 }
                 break;
             case SDL_QUIT:
