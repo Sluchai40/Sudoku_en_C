@@ -1,4 +1,3 @@
-#include <windows.h>
 #include <fonctions.h>
 
 void init_grid_surface(sudoku *sudoku_tab)
@@ -39,6 +38,7 @@ void quitGraphics(sudoku *sudoku_tab)
     SDL_DestroyTexture(sudoku_tab -> gridTexture);
     SDL_DestroyRenderer(sudoku_tab -> renderer);
     SDL_DestroyWindow(sudoku_tab -> window);
+    SDL_DestroyTexture(sudoku_tab -> cellTextures);
     TTF_Quit();
     SDL_Quit();
 }

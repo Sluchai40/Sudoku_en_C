@@ -1,6 +1,4 @@
-#include <windows.h>
-#include <fonctions.h>
-#include <stdio.h>
+#include "fonctions.h"
 
 void font_police(sudoku *sudoku_tab)
 {

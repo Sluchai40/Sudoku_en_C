@@ -42,32 +42,13 @@ int main(int ac, char **av)
     shuffle_range(&sudoku_tab);
     solver(&sudoku_tab);
     remove_numbers(&sudoku_tab, 81);
-    
-    for (int j = 0; j < 9; j++)
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            printf("%i ", sudoku_tab.grid[j][i]);
-        }
-        printf("\n");
-    }
-
     init_graphics(&sudoku_tab);
 
-    SDL_Event events;
     int isOpen = 1;
 
     while(isOpen)
     {
-        while (SDL_PollEvent(&events))
-        {
-            switch (events.type)
-            {
-            case SDL_QUIT:
-                isOpen = 0;
-                break;
-            }
-        }
+        event(&sudoku_tab, isOpen);
         SDL_Rect src = {0, 0 , GRID_SIZE, GRID_SIZE};
 
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
@@ -77,8 +58,23 @@ int main(int ac, char **av)
         {
             for (int y= 0; y < 9; y++)
             {
+                if (y == sudoku_tab.posY && x == sudoku_tab.posX)
+                {
+                    SDL_SetRenderDrawColor(sudoku_tab.renderer, 255, 255, 255, 255);
+                    SDL_Rect mouse_rect = {x * CELL_SIZE + 1, y * CELL_SIZE + 1, CELL_SIZE - 1, CELL_SIZE -1};
+                    SDL_RenderDrawRect(sudoku_tab.renderer, &mouse_rect);
+                }
+                if (y == sudoku_tab.posY_clicked && x == sudoku_tab.posX_clicked)
+                {
+                    SDL_SetRenderDrawColor(sudoku_tab.renderer, 254, 70, 165, 255);
+                    SDL_Rect mouse_rect = {x * CELL_SIZE + 1, y * CELL_SIZE + 1, CELL_SIZE - 1, CELL_SIZE - 1};
+                    SDL_RenderFillRect(sudoku_tab.renderer, &mouse_rect);
+                }
                 SDL_Rect test = {y * CELL_SIZE + CELL_MARGIN, x * CELL_SIZE + CELL_MARGIN, FONT_SIZE, FONT_SIZE};
-                SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.cellTextures[y], NULL, &test);
+                if (sudoku_tab.grid[x][y] != 0)
+                {
+                    SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.cellTextures[sudoku_tab.grid[x][y] - 1], NULL, &test);    
+                }
             }
         }
         SDL_RenderPresent(sudoku_tab.renderer);

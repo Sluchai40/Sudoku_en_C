@@ -23,6 +23,11 @@ typedef struct s_sudoku
     int             gridClone[9][9];
     int             gridass[9][9][9];
 
+    int             posX;
+    int             posY;
+    int             posX_clicked;
+    int             posY_clicked;
+
 }                   sudoku;
 
 /*
@@ -57,5 +62,7 @@ void init_grid_surface(sudoku *sudoku_tab);
 void quitGraphics(sudoku *sudoku_tab);
 
 void font_police(sudoku *sudoku_tab);
+
+void event (sudoku *sudoku_tab, int *isOpen);
 
 #endif
