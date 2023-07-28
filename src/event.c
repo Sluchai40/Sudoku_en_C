@@ -20,6 +20,7 @@ void event (sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab -> posX_clicked = sudoku_tab -> posX;
                     sudoku_tab -> posY_clicked = sudoku_tab -> posY;
                 }
+                break;
 
             case SDL_KEYDOWN:
                 if(events.key.keysym.sym >= SDLK_1 && events.key.keysym.sym <= SDLK_9)
