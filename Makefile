@@ -26,6 +26,9 @@ SRCS_RAW := mainu.c	\
 			solver_Sudoku.c 	\
 			strsplit.c 	\
 			test_chiffre.c 	\
+			graphics_init.c 	\
+			init_grid_surface.c 	\
+			police.c 	\
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
 OBJS := $(SRCS:$(SRCS_FOLDER)/%.c=$(OBJS_FOLDER)/%.o)

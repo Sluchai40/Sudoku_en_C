@@ -1,14 +1,28 @@
 #ifndef FONCTIONS_H
 #define FONCTIONS_H
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+
+#define CELL_SIZE 50
+#define CELL_MARGIN 5
+#define GRID_SIZE (CELL_SIZE * 9)
+#define FONT_SIZE (CELL_SIZE - CELL_MARGIN * 2)
+#define WINDOW_WIDTH (GRID_SIZE)
+#define WINDOW_HEIGHT (GRID_SIZE)
 
 typedef struct s_sudoku
 {
+    SDL_Window *window;
+	SDL_Renderer *renderer;
+	SDL_Texture *gridTexture;
+	SDL_Texture *cellTextures[9];
 
     int             range[9];
     int             grid[9][9];
     int             gridClone[9][9];
     int             gridass[9][9][9];
+
 }                   sudoku;
 
 /*
@@ -36,5 +50,12 @@ int segment (sudoku *sudoku_tab);
 
 int segment_2(sudoku *sudoku_tab);
 
+void init_graphics(sudoku *sudoku_tab);
+
+void init_grid_surface(sudoku *sudoku_tab);
+
+void quitGraphics(sudoku *sudoku_tab);
+
+void font_police(sudoku *sudoku_tab);
 
 #endif
