@@ -70,7 +70,7 @@ int main(int ac, char **av)
                     SDL_Rect mouse_rect = {x * CELL_SIZE + 1, y * CELL_SIZE + 1, CELL_SIZE - 1, CELL_SIZE - 1};
                     SDL_RenderFillRect(sudoku_tab.renderer, &mouse_rect);
                 }
-                SDL_Rect test = {y * CELL_SIZE + CELL_MARGIN, x * CELL_SIZE + CELL_MARGIN, FONT_SIZE, FONT_SIZE};
+                SDL_Rect test = {x * CELL_SIZE + CELL_MARGIN, y * CELL_SIZE + CELL_MARGIN, FONT_SIZE, FONT_SIZE};
                 if (sudoku_tab.grid[x][y] != 0)
                 {
                     SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.cellTextures[sudoku_tab.grid[x][y] - 1], NULL, &test);    
