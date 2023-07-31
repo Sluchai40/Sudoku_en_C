@@ -30,6 +30,8 @@ SRCS_RAW := mainu.c	\
 			init_grid_surface.c 	\
 			police.c 	\
 			event.c 	\
+			init_sudoku.c 	\
+			test_fin.c 	\
 
 SRCS := $(addprefix $(SRCS_FOLDER)/, $(SRCS_RAW))
 OBJS := $(SRCS:$(SRCS_FOLDER)/%.c=$(OBJS_FOLDER)/%.o)

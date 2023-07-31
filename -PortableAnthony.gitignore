@@ -1,0 +1,5 @@
+*.o
+*.d
+*.exe
+CONOUTS$
+sudoku.exe.stackdump

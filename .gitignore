@@ -3,3 +3,4 @@
 *.exe
 CONOUTS$
 sudoku.exe.stackdump
+.vscode/*
