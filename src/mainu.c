@@ -66,6 +66,12 @@ int main(int ac, char **av)
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
         SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_finished, NULL, &rect_button_finished);
 
+        const int line_max_height = CELL_SIZE * 7;
+        int line_height = line_max_height * sudoku_tab.cell_fill /sudoku_tab.empty_cell_init;
+        SDL_Rect rect_jauge_progression = {(GRID_SIZE + MENU_SIZE / 2) - 2, CELL_SIZE * 8 - line_height, 5, line_height};
+        SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 255, 0, 255);
+        SDL_RenderFillRect(sudoku_tab.renderer, &rect_jauge_progression);
+
         if (sudoku_tab.game_finished == 0)
         {
             time_t time_frame = time(NULL);
@@ -107,6 +113,14 @@ int main(int ac, char **av)
                     SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.cellTextures[sudoku_tab.grid[x][y] - 1], NULL, &test);    
                 }
             }
+        }
+        if (sudoku_tab.almost_finished == 1)
+        {
+            SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 0, 0, 255);
+            SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3.5, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &valider);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.almost_finish, NULL, &valider);
+
         }
         if (sudoku_tab.game_finished == 1)
         {

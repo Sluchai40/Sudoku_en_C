@@ -14,6 +14,7 @@ typedef struct s_sudoku
     SDL_Texture     *loosing;
     SDL_Texture     *button_start;
     SDL_Texture     *button_finished;
+    SDL_Texture     *almost_finish;
     TTF_Font        *font;
 
     int             range[9];
@@ -27,6 +28,9 @@ typedef struct s_sudoku
     int             posX_clicked;
     int             posY_clicked;
     int             game_finished;
+    int             almost_finished;
+    int             empty_cell_init;
+    int             cell_fill;
 
     time_t          time;
 

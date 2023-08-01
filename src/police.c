@@ -25,6 +25,9 @@ void end_message(sudoku *sudoku_tab)
     SDL_Surface* loosing = TTF_RenderText_Blended(sudoku_tab -> font, "Raté espece de gros nul!", (SDL_Color){ 255, 0, 0, 255});
     sudoku_tab -> loosing = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, loosing);
     SDL_FreeSurface(loosing);
+    SDL_Surface* font_valider = TTF_RenderText_Blended(sudoku_tab -> font, "VALIDER?", (SDL_Color){255, 255, 255, 255});
+    sudoku_tab -> almost_finish = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, font_valider);
+    SDL_FreeSurface(font_valider);
 }
 
 void button_start(sudoku *sudoku_tab)
