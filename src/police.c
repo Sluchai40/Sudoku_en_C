@@ -1,4 +1,6 @@
 #include "fonctions.h"
+#include "display.h"
+#include "SDL2/SDL_image.h"
 
 void font_police(sudoku *sudoku_tab)
 {
@@ -23,4 +25,18 @@ void end_message(sudoku *sudoku_tab)
     SDL_Surface* loosing = TTF_RenderText_Blended(sudoku_tab -> font, "Raté espece de gros nul!", (SDL_Color){ 255, 0, 0, 255});
     sudoku_tab -> loosing = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, loosing);
     SDL_FreeSurface(loosing);
+}
+
+void button_start(sudoku *sudoku_tab)
+{
+    SDL_Surface *start =  IMG_Load("press_start.jpg");
+    sudoku_tab -> button_start = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, start);
+    SDL_FreeSurface(start);
+}
+
+void button_finished(sudoku *sudoku_tab)
+{
+    SDL_Surface *finished =  IMG_Load("press_finished.png");
+    sudoku_tab -> button_finished = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, finished);
+    SDL_FreeSurface(finished);
 }

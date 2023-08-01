@@ -5,6 +5,9 @@
 #include "fonctions.h"
 #include <time.h>
 #include <windows.h>
+#include "display.h"
+
+#include "SDL2/SDL_image.h"
 
 
 int main(int ac, char **av)
@@ -55,6 +58,14 @@ int main(int ac, char **av)
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
         SDL_RenderClear(sudoku_tab.renderer);
 
+        SDL_Rect rect_button_start = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
+        SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
+        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_start, NULL, &rect_button_start);
+
+        SDL_Rect rect_button_finished = {GRID_SIZE + CELL_SIZE, 0, CELL_SIZE * 2, CELL_SIZE};
+        SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
+        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_finished, NULL, &rect_button_finished);
+
         if (sudoku_tab.game_finished == 0)
         {
             time_t time_frame = time(NULL);
@@ -66,7 +77,7 @@ int main(int ac, char **av)
             SDL_Surface* time_clock = TTF_RenderText_Blended(sudoku_tab.font, timeString, (SDL_Color){ 0, 0, 0, 255});
             SDL_Texture* time_clock_texture = SDL_CreateTextureFromSurface(sudoku_tab.renderer, time_clock);
 
-            SDL_Rect time_clock_rect = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 2, CELL_SIZE * 2, CELL_SIZE};
+            SDL_Rect time_clock_rect = {GRID_SIZE + CELL_SIZE + 4, 0 + CELL_SIZE / 2, CELL_SIZE * 2 - 8, CELL_SIZE / 2};
             SDL_RenderCopy(sudoku_tab.renderer, time_clock_texture, NULL, &time_clock_rect);
 
             SDL_FreeSurface(time_clock);

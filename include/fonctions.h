@@ -4,23 +4,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#define CELL_SIZE 50
-#define CELL_MARGIN 5
-#define GRID_SIZE (CELL_SIZE * 9)
-#define FONT_SIZE (CELL_SIZE - CELL_MARGIN * 2)
-#define MENU_SIZE (CELL_SIZE * 4)
-#define WINDOW_WIDTH (GRID_SIZE + MENU_SIZE)
-#define WINDOW_HEIGHT (GRID_SIZE)
-
 typedef struct s_sudoku
 {
-    SDL_Window *window;
-	SDL_Renderer *renderer;
-	SDL_Texture *gridTexture;
-	SDL_Texture *cellTextures[9];
-    SDL_Texture *victory;
-    SDL_Texture *loosing;
-    TTF_Font *font;
+    SDL_Window      *window;
+	SDL_Renderer    *renderer;
+	SDL_Texture     *gridTexture;
+	SDL_Texture     *cellTextures[9];
+    SDL_Texture     *victory;
+    SDL_Texture     *loosing;
+    SDL_Texture     *button_start;
+    SDL_Texture     *button_finished;
+    TTF_Font        *font;
 
     int             range[9];
     int             grid[9][9];
@@ -78,5 +72,9 @@ void init_sudoku(sudoku *sudoku_tab);
 int test_fin(sudoku *sudoku_tab);
 
 void end_message(sudoku *sudoku_tab);
+
+void button_start(sudoku *sudoku_tab);
+
+void button_finished(sudoku *sudoku_tab);
 
 #endif

@@ -1,4 +1,7 @@
 #include <fonctions.h>
+#include "display.h"
+
+#include "SDL2/SDL_image.h"
 
 void init_grid_surface(sudoku *sudoku_tab)
 {
@@ -40,7 +43,8 @@ void quitGraphics(sudoku *sudoku_tab)
     SDL_DestroyTexture(sudoku_tab -> gridTexture);
     SDL_DestroyRenderer(sudoku_tab -> renderer);
     SDL_DestroyWindow(sudoku_tab -> window);
-    TTF_CloseFont;
+    TTF_CloseFont(sudoku_tab -> font);
+    IMG_Quit();
     TTF_Quit();
     SDL_Quit();
 }

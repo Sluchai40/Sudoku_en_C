@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "fonctions.h"
 #include <stdio.h>
+
 void remove_numbers(sudoku *sudoku_tab, int clean_numb)
 {
     int EMPTY_x;

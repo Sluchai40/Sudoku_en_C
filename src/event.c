@@ -1,5 +1,6 @@
 #include "fonctions.h"
 #include "strsplit.h"
+#include "display.h"
 
 void event (sudoku *sudoku_tab, int *isOpen)
 {
@@ -18,6 +19,12 @@ void event (sudoku *sudoku_tab, int *isOpen)
                 {
                     sudoku_tab -> posX_clicked = sudoku_tab -> posX;
                     sudoku_tab -> posY_clicked = sudoku_tab -> posY;
+                    const SDL_Point point_click = {events.motion.x, events.motion.y};
+                    const SDL_Rect rect_button = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
+                    if (SDL_PointInRect(&point_click, &rect_button) == SDL_TRUE)
+                    {
+                        init_sudoku(sudoku_tab);
+                    }
                 }
                 break;
 
