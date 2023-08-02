@@ -53,19 +53,8 @@ int main(int ac, char **av)
 
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 156, 86, 232, 255);
         SDL_RenderClear(sudoku_tab.renderer);
+        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.gridTexture, &src, &src);
 
-        if (sudoku_tab.almost_finished == 1)
-        {
-            SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 0, 0, 255);
-
-            SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3.5, CELL_SIZE * 2, CELL_SIZE};
-            SDL_RenderFillRect(sudoku_tab.renderer, &valider);
-            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.almost_validated, NULL, &valider);
-
-            SDL_Rect continuer = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 4.5, CELL_SIZE * 2, CELL_SIZE};
-            SDL_RenderFillRect(sudoku_tab.renderer, &continuer);
-            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.almost_continued, NULL, &continuer);
-        }
 
         SDL_Rect rect_button_start = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
         SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_start, NULL, &rect_button_start);
@@ -79,36 +68,6 @@ int main(int ac, char **av)
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 255, 0, 255);
         SDL_RenderFillRect(sudoku_tab.renderer, &rect_jauge_progression);
 
-        if (sudoku_tab.game_finished == 0)
-        {
-            time_t time_frame = time(NULL);
-            unsigned long long int t = difftime(time_frame, sudoku_tab.time);
-            struct tm *time_info;
-            char timeString[9];
-            time_info = localtime((time_t*)&t);
-            strftime(timeString, sizeof(timeString), "%M,%S", time_info);
-            SDL_Surface *time_clock = TTF_RenderText_Blended(sudoku_tab.font, timeString, (SDL_Color){0, 0, 0, 255});
-            SDL_Texture *time_clock_texture = SDL_CreateTextureFromSurface(sudoku_tab.renderer, time_clock);
-
-            SDL_Rect time_clock_rect = {GRID_SIZE + CELL_SIZE + 4, 0 + CELL_SIZE / 2, CELL_SIZE * 2 - 8, CELL_SIZE / 2};
-            SDL_RenderCopy(sudoku_tab.renderer, time_clock_texture, NULL, &time_clock_rect);
-
-            SDL_FreeSurface(time_clock);
-            SDL_DestroyTexture(time_clock_texture);
-        }
-
-        if (sudoku_tab.game_finished == 1)
-        {
-            SDL_Rect end_message = {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, FONT_SIZE};
-            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.victory, NULL, &end_message);
-        }
-        if (sudoku_tab.game_finished == 2)
-        {
-            SDL_Rect end_message = {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, FONT_SIZE};
-            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.loosing, NULL, &end_message);
-        }
-
-        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.gridTexture, &src, &src);
         for (int x = 0; x < 9; x++)
         {
             for (int y = 0; y < 9; y++)
@@ -140,6 +99,71 @@ int main(int ac, char **av)
                     }
                 }
             }
+
+        if (sudoku_tab.game_finished == 0)
+        {
+            time_t time_frame = time(NULL);
+            unsigned long long int t = difftime(time_frame, sudoku_tab.time);
+            struct tm *time_info;
+            char timeString[9];
+            time_info = localtime((time_t*)&t);
+            strftime(timeString, sizeof(timeString), "%M,%S", time_info);
+            SDL_Surface *time_clock = TTF_RenderText_Blended(sudoku_tab.font, timeString, (SDL_Color){0, 0, 0, 255});
+            SDL_Texture *time_clock_texture = SDL_CreateTextureFromSurface(sudoku_tab.renderer, time_clock);
+
+            SDL_Rect time_clock_rect = {GRID_SIZE + CELL_SIZE + 4, 0 + CELL_SIZE / 2, CELL_SIZE * 2 - 8, CELL_SIZE / 2};
+            SDL_RenderCopy(sudoku_tab.renderer, time_clock_texture, NULL, &time_clock_rect);
+
+            SDL_FreeSurface(time_clock);
+            SDL_DestroyTexture(time_clock_texture);
+        }
+
+        if (sudoku_tab.almost_finished == 1 && sudoku_tab.game_finished == 0)
+        {
+            SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 0, 0, 255);
+
+            SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &valider);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.almost_validated, NULL, &valider);
+
+            SDL_Rect continuer = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 5, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &continuer);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.almost_continued, NULL, &continuer);
+        }
+
+        if (sudoku_tab.game_finished == 1)
+        {
+            SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 0, 0, 255);
+
+            SDL_Rect end_message = {0, CELL_SIZE * 4, GRID_SIZE, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &end_message);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.victory, NULL, &end_message);
+
+            SDL_Rect new_game = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &new_game);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.new_game, NULL, &new_game);
+
+            SDL_Rect try_again = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 5, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &try_again);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.try_again, NULL, &try_again);
+        }
+        if (sudoku_tab.game_finished == 2)
+        {
+            SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 0, 0, 255);
+
+            SDL_Rect end_message = {0, CELL_SIZE * 4, GRID_SIZE, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &end_message);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.loosing, NULL, &end_message);
+
+            SDL_Rect new_game = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &new_game);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.new_game, NULL, &new_game);
+
+            SDL_Rect try_again = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 5, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderFillRect(sudoku_tab.renderer, &try_again);
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.try_again, NULL, &try_again);
+        }
+
         }
 
         SDL_RenderPresent(sudoku_tab.renderer);

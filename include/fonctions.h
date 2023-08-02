@@ -17,6 +17,8 @@ typedef struct s_sudoku
     SDL_Texture *button_finished;
     SDL_Texture *almost_validated;
     SDL_Texture *almost_continued;
+    SDL_Texture *new_game;
+    SDL_Texture *try_again;
     TTF_Font *font;
 
     int posX;
@@ -35,8 +37,8 @@ typedef struct s_sudoku
     int range[9];
     int grid[9][9];
     int gridValid[9][9];
-    int gridClone[9][9];
     int gridass[9][9][9];
+    int gridClone[9][9];
 
 } sudoku;
 

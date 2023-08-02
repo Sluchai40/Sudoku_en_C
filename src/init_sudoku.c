@@ -25,5 +25,5 @@ void init_sudoku(sudoku *sudoku_tab)
             sudoku_tab->gridValid[x][y] = sudoku_tab->grid[x][y];
         }
     }
-    remove_numbers(sudoku_tab, 10);
+    remove_numbers(sudoku_tab, 2);
 }

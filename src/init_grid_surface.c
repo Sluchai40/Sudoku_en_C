@@ -51,6 +51,8 @@ void quitGraphics(sudoku *sudoku_tab)
     SDL_DestroyTexture(sudoku_tab -> almost_validated);
     SDL_DestroyTexture(sudoku_tab -> almost_continued);
     SDL_DestroyRenderer(sudoku_tab -> renderer);
+    SDL_DestroyRenderer(sudoku_tab -> new_game);
+    SDL_DestroyRenderer(sudoku_tab -> try_again);
     SDL_DestroyWindow(sudoku_tab -> window);
     TTF_CloseFont(sudoku_tab -> font);
     IMG_Quit();

@@ -23,21 +23,29 @@ void font_police(sudoku *sudoku_tab)
 
 void end_message(sudoku *sudoku_tab)
 {
-    SDL_Surface* victory = TTF_RenderText_Blended(sudoku_tab -> font, "Félicitations cette grille est valide!", (SDL_Color){ 0, 255, 0, 255});
+    SDL_Surface* victory = TTF_RenderText_Blended(sudoku_tab -> font, "Félicitations !", (SDL_Color){ 0, 255, 0, 255});
     sudoku_tab -> victory = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, victory);
     SDL_FreeSurface(victory);
     
-    SDL_Surface* loosing = TTF_RenderText_Blended(sudoku_tab -> font, "Raté espece de gros nul!", (SDL_Color){ 255, 0, 0, 255});
+    SDL_Surface* loosing = TTF_RenderText_Blended(sudoku_tab -> font, "Espece de gros nul!", (SDL_Color){ 255, 0, 0, 255});
     sudoku_tab -> loosing = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, loosing);
     SDL_FreeSurface(loosing);
 
-    SDL_Surface* font_valider = TTF_RenderText_Blended(sudoku_tab -> font, "Valider?", (SDL_Color){255, 255, 255, 255});
+    SDL_Surface* font_valider = TTF_RenderText_Blended(sudoku_tab -> font, "Valider ?", (SDL_Color){255, 255, 255, 255});
     sudoku_tab -> almost_validated = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, font_valider);
     SDL_FreeSurface(font_valider);
 
-    SDL_Surface* font_continuer = TTF_RenderText_Blended(sudoku_tab -> font, "Continuer?", (SDL_Color){255, 255, 255, 255});
+    SDL_Surface* font_continuer = TTF_RenderText_Blended(sudoku_tab -> font, "Continuer ?", (SDL_Color){255, 255, 255, 255});
     sudoku_tab -> almost_continued = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, font_continuer);
     SDL_FreeSurface(font_continuer);
+
+    SDL_Surface* new_game = TTF_RenderText_Blended(sudoku_tab -> font, "New Game !", (SDL_Color){255, 255, 255, 255});
+    sudoku_tab -> new_game = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, new_game);
+    SDL_FreeSurface(new_game);
+    
+    SDL_Surface* try_again = TTF_RenderText_Blended(sudoku_tab -> font, "Try Again !", (SDL_Color){255, 255, 255, 255});
+    sudoku_tab -> try_again = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, try_again);
+    SDL_FreeSurface(try_again);
 }
 
 void button_start(sudoku *sudoku_tab)

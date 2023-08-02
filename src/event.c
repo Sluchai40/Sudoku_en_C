@@ -21,12 +21,37 @@ void event(sudoku *sudoku_tab, int *isOpen)
                 sudoku_tab->posY_clicked = sudoku_tab->posY;
                 const SDL_Point point_click = {events.motion.x, events.motion.y};
                 const SDL_Rect rect_button = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
-                SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3.5, CELL_SIZE * 2, CELL_SIZE};
-                SDL_Rect continuer = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 4.5, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect continuer = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 5, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect new_game = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect try_again = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 5, CELL_SIZE * 2, CELL_SIZE};
+
                 if (SDL_PointInRect(&point_click, &rect_button) == SDL_TRUE)
                 {
                     init_sudoku(sudoku_tab);
                 }
+
+                if (sudoku_tab -> game_finished > 0 && SDL_PointInRect(&point_click, &new_game) == SDL_TRUE)
+                {
+                    init_sudoku(sudoku_tab);
+                }
+
+                if (sudoku_tab -> game_finished > 0 && SDL_PointInRect(&point_click, &try_again) == SDL_TRUE)
+                {
+                    sudoku_tab -> cell_fill = 0;
+                    sudoku_tab -> game_finished = 0;
+                    sudoku_tab -> almost_finished = 0;
+                    sudoku_tab -> time = time(NULL);
+
+                    for (int i = 0; i < 9; i++)
+                    {
+                        for (int j = 0; j < 9; j++)
+                        {
+                            sudoku_tab->grid[i][j] = sudoku_tab->gridClone[i][j];
+                        }
+                    }
+                }
+
                 if (sudoku_tab->almost_finished == 1 && SDL_PointInRect(&point_click, &valider) == SDL_TRUE)
                 {
                     if (test_fin(sudoku_tab))
@@ -37,12 +62,13 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     {
                         sudoku_tab->game_finished = 2;
                     }
-                    if (sudoku_tab->almost_finished == 1 && SDL_PointInRect(&point_click, &continuer) == SDL_TRUE)
-                    {
-                        sudoku_tab->grid[sudoku_tab->last_y_position][sudoku_tab->last_x_position] = 0;
-                        sudoku_tab->cell_fill--;
-                        sudoku_tab->almost_finished = 0;
-                    }
+                }
+
+                if (sudoku_tab->almost_finished == 1 && SDL_PointInRect(&point_click, &continuer) == SDL_TRUE)
+                {
+                    sudoku_tab->grid[sudoku_tab->last_y_position][sudoku_tab->last_x_position] = 0;
+                    sudoku_tab->cell_fill--;
+                    sudoku_tab->almost_finished = 0;
                 }
             }
             break;
@@ -54,8 +80,8 @@ void event(sudoku *sudoku_tab, int *isOpen)
                 {
                     sudoku_tab->grid[sudoku_tab->posY_clicked][sudoku_tab->posX_clicked] = events.key.keysym.sym - SDLK_0;
                     sudoku_tab->cell_fill++;
-                    // sudoku_tab->last_x_position = sudoku_tab->posX_clicked;
-                    // sudoku_tab->last_y_position = sudoku_tab->posY_clicked;
+                    sudoku_tab->last_x_position = sudoku_tab->posX_clicked;
+                    sudoku_tab->last_y_position = sudoku_tab->posY_clicked;
                     int x, y;
                     if (!case_vide(sudoku_tab->grid, &x, &y))
                     {
