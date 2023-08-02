@@ -39,8 +39,17 @@ void init_grid_surface(sudoku *sudoku_tab)
 void quitGraphics(sudoku *sudoku_tab)
 {
     for (int i = 0; i < 9; i++)
+    {
         SDL_DestroyTexture(sudoku_tab -> cellTextures[i]);
+        SDL_DestroyTexture(sudoku_tab -> cellTexturesPlayer[i]);
+    }
     SDL_DestroyTexture(sudoku_tab -> gridTexture);
+    SDL_DestroyTexture(sudoku_tab -> victory);
+    SDL_DestroyTexture(sudoku_tab -> loosing);
+    SDL_DestroyTexture(sudoku_tab -> button_start);
+    SDL_DestroyTexture(sudoku_tab -> button_finished);
+    SDL_DestroyTexture(sudoku_tab -> almost_validated);
+    SDL_DestroyTexture(sudoku_tab -> almost_continued);
     SDL_DestroyRenderer(sudoku_tab -> renderer);
     SDL_DestroyWindow(sudoku_tab -> window);
     TTF_CloseFont(sudoku_tab -> font);

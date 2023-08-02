@@ -6,35 +6,39 @@
 
 typedef struct s_sudoku
 {
-    SDL_Window      *window;
-	SDL_Renderer    *renderer;
-	SDL_Texture     *gridTexture;
-	SDL_Texture     *cellTextures[9];
-    SDL_Texture     *victory;
-    SDL_Texture     *loosing;
-    SDL_Texture     *button_start;
-    SDL_Texture     *button_finished;
-    SDL_Texture     *almost_finish;
-    TTF_Font        *font;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *gridTexture;
+    SDL_Texture *cellTextures[9];
+    SDL_Texture *cellTexturesPlayer[9];
+    SDL_Texture *victory;
+    SDL_Texture *loosing;
+    SDL_Texture *button_start;
+    SDL_Texture *button_finished;
+    SDL_Texture *almost_validated;
+    SDL_Texture *almost_continued;
+    TTF_Font *font;
 
-    int             range[9];
-    int             grid[9][9];
-    int             gridValid[9][9];
-    int             gridClone[9][9];
-    int             gridass[9][9][9];
+    int posX;
+    int posY;
+    int posX_clicked;
+    int posY_clicked;
+    int game_finished;
+    int almost_finished;
+    int empty_cell_init;
+    int cell_fill;
+    int last_x_position;
+    int last_y_position;
 
-    int             posX;
-    int             posY;
-    int             posX_clicked;
-    int             posY_clicked;
-    int             game_finished;
-    int             almost_finished;
-    int             empty_cell_init;
-    int             cell_fill;
+    time_t time;
 
-    time_t          time;
+    int range[9];
+    int grid[9][9];
+    int gridValid[9][9];
+    int gridClone[9][9];
+    int gridass[9][9][9];
 
-}                   sudoku;
+} sudoku;
 
 /*
 **  Trouve une case vide
@@ -51,13 +55,13 @@ void remove_numbers(sudoku *sudoku_tab, int clean_numb);
 
 int idiot_solver(sudoku *sudoku_tab);
 
-int gridass (sudoku *sudoku_tab);
+int gridass(sudoku *sudoku_tab);
 
-int celib_nu (sudoku *sudoku_tab);
+int celib_nu(sudoku *sudoku_tab);
 
-int celib_cache (sudoku *sudoku_tab);
+int celib_cache(sudoku *sudoku_tab);
 
-int segment (sudoku *sudoku_tab);
+int segment(sudoku *sudoku_tab);
 
 int segment_2(sudoku *sudoku_tab);
 
@@ -69,7 +73,7 @@ void quitGraphics(sudoku *sudoku_tab);
 
 void font_police(sudoku *sudoku_tab);
 
-void event (sudoku *sudoku_tab, int *isOpen);
+void event(sudoku *sudoku_tab, int *isOpen);
 
 void init_sudoku(sudoku *sudoku_tab);
 

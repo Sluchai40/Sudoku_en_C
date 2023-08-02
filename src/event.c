@@ -21,12 +21,13 @@ void event(sudoku *sudoku_tab, int *isOpen)
                 sudoku_tab->posY_clicked = sudoku_tab->posY;
                 const SDL_Point point_click = {events.motion.x, events.motion.y};
                 const SDL_Rect rect_button = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
-                const SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3.5, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect valider = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 3.5, CELL_SIZE * 2, CELL_SIZE};
+                SDL_Rect continuer = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 4.5, CELL_SIZE * 2, CELL_SIZE};
                 if (SDL_PointInRect(&point_click, &rect_button) == SDL_TRUE)
                 {
                     init_sudoku(sudoku_tab);
                 }
-                if (sudoku_tab -> almost_finished == 1 && SDL_PointInRect(&point_click, &valider) == SDL_TRUE)
+                if (sudoku_tab->almost_finished == 1 && SDL_PointInRect(&point_click, &valider) == SDL_TRUE)
                 {
                     if (test_fin(sudoku_tab))
                     {
@@ -35,6 +36,12 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     else
                     {
                         sudoku_tab->game_finished = 2;
+                    }
+                    if (sudoku_tab->almost_finished == 1 && SDL_PointInRect(&point_click, &continuer) == SDL_TRUE)
+                    {
+                        sudoku_tab->grid[sudoku_tab->last_y_position][sudoku_tab->last_x_position] = 0;
+                        sudoku_tab->cell_fill--;
+                        sudoku_tab->almost_finished = 0;
                     }
                 }
             }
@@ -47,6 +54,8 @@ void event(sudoku *sudoku_tab, int *isOpen)
                 {
                     sudoku_tab->grid[sudoku_tab->posY_clicked][sudoku_tab->posX_clicked] = events.key.keysym.sym - SDLK_0;
                     sudoku_tab->cell_fill++;
+                    // sudoku_tab->last_x_position = sudoku_tab->posX_clicked;
+                    // sudoku_tab->last_y_position = sudoku_tab->posY_clicked;
                     int x, y;
                     if (!case_vide(sudoku_tab->grid, &x, &y))
                     {

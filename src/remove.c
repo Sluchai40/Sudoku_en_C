@@ -29,7 +29,7 @@ void remove_numbers(sudoku *sudoku_tab, int clean_numb)
         // {
         //     sudoku_tab->grid[EMPTY_x][EMPTY_y] = stock;
         // }
-        if (solver(sudoku_tab, 0, sudoku_tab->gridClone) > 1)
+        if (solver(sudoku_tab, 0, (sudoku_tab->gridClone)) > 1)
         {
             sudoku_tab->grid[EMPTY_x][EMPTY_y] = stock;
         }
