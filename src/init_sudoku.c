@@ -3,11 +3,11 @@
 
 void init_sudoku(sudoku *sudoku_tab)
 {
-    sudoku_tab->almost_finished = 0;
     sudoku_tab->game_finished = 0;
     sudoku_tab->time = time(NULL);
     sudoku_tab->cell_fill = 0;
     sudoku_tab->empty_cell_init = 0;
+    sudoku_tab->almost_starting = 0;
 
     for (int x = 0; x < 9; x++)
     {

@@ -24,6 +24,7 @@ typedef struct s_sudoku
     SDL_Texture *level_three;
     SDL_Texture *level_four;
     SDL_Texture *level_five;
+    SDL_Texture *cat_sprite;
     TTF_Font *font;
 
     int posX;
@@ -38,6 +39,7 @@ typedef struct s_sudoku
     int last_y_position;
     int almost_starting;
     int clean_number;
+    int count;
 
     time_t time;
 
@@ -94,6 +96,9 @@ void button_start(sudoku *sudoku_tab);
 
 void button_finished(sudoku *sudoku_tab);
 
-#endif
+void animated_cat(sudoku *sudoku_tab);
 
-// 50 70 90 110 130
+void cat_sprite(sudoku *sudoku_tab);
+void animated_cat(sudoku *sudoku_tab);
+
+#endif

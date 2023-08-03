@@ -14,6 +14,7 @@ void init_graphics(sudoku *sudoku_tab)
     sudoku_tab -> almost_finished = 0;
     sudoku_tab -> game_finished = 0;
     sudoku_tab -> almost_starting = 0;
+    sudoku_tab -> count = 0;
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
@@ -25,4 +26,6 @@ void init_graphics(sudoku *sudoku_tab)
     end_message(sudoku_tab);
     button_start(sudoku_tab);
     button_finished(sudoku_tab);
+    cat_sprite(sudoku_tab);
+    animated_cat(sudoku_tab);
 }
