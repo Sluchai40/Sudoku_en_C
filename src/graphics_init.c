@@ -13,6 +13,7 @@ void init_graphics(sudoku *sudoku_tab)
     sudoku_tab->posY_clicked = 0;
     sudoku_tab -> almost_finished = 0;
     sudoku_tab -> game_finished = 0;
+    sudoku_tab -> almost_starting = 0;
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);

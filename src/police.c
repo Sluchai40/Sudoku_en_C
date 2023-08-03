@@ -50,9 +50,29 @@ void end_message(sudoku *sudoku_tab)
 
 void button_start(sudoku *sudoku_tab)
 {
-    SDL_Surface *start =  IMG_Load("press_start.jpg");
+    SDL_Surface *start =  IMG_Load("start.png");
     sudoku_tab -> button_start = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, start);
     SDL_FreeSurface(start);
+    
+    SDL_Surface *level_one = IMG_Load("flame1.png");
+    sudoku_tab -> level_one = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, level_one);
+    SDL_FreeSurface(level_one);
+
+    SDL_Surface *level_two = IMG_Load("flame2.png");
+    sudoku_tab -> level_two = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, level_two);
+    SDL_FreeSurface(level_two);
+
+    SDL_Surface *level_three = IMG_Load("flame3.png");
+    sudoku_tab -> level_three = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, level_three);
+    SDL_FreeSurface(level_three);
+
+    SDL_Surface *level_four = IMG_Load("flame4.png");
+    sudoku_tab -> level_four = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, level_four);
+    SDL_FreeSurface(level_four);
+
+    SDL_Surface *level_five = IMG_Load("flame5.png");
+    sudoku_tab -> level_five = SDL_CreateTextureFromSurface(sudoku_tab -> renderer, level_five);
+    SDL_FreeSurface(level_five);
 }
 
 void button_finished(sudoku *sudoku_tab)

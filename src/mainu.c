@@ -55,16 +55,32 @@ int main(int ac, char **av)
         SDL_RenderClear(sudoku_tab.renderer);
         SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.gridTexture, &src, &src);
 
+        if (sudoku_tab.almost_starting == 0)
+        {
+            SDL_Rect rect_button_start = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 7.5, CELL_SIZE * 2, CELL_SIZE * 1.5};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_start, NULL, &rect_button_start);
+            SDL_Rect rect_button_finished = {GRID_SIZE + CELL_SIZE, 0, CELL_SIZE * 2, CELL_SIZE};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_finished, NULL, &rect_button_finished);
+        }
+        
+        if (sudoku_tab.almost_starting == 1)
+        {
+            SDL_Rect level_one = {LEVEL_SIZE - 25, GRID_SIZE - 50, 50, 50};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.level_one, NULL, &level_one);
+            SDL_Rect level_two = {LEVEL_SIZE - 35, GRID_SIZE - 120, 70, 70};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.level_two, NULL, &level_two);
+            SDL_Rect level_three = {LEVEL_SIZE - 45, GRID_SIZE - 210, 90, 90};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.level_three, NULL, &level_three);
+            SDL_Rect level_four = {LEVEL_SIZE - 55, GRID_SIZE - 320, 110, 110};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.level_four, NULL, &level_four);
+            SDL_Rect level_five = {LEVEL_SIZE - 65, 0, 130, 130};
+            SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.level_five, NULL, &level_five);
 
-        SDL_Rect rect_button_start = {GRID_SIZE + CELL_SIZE, CELL_SIZE * 8, CELL_SIZE * 2, CELL_SIZE};
-        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_start, NULL, &rect_button_start);
+        }
 
-        SDL_Rect rect_button_finished = {GRID_SIZE + CELL_SIZE, 0, CELL_SIZE * 2, CELL_SIZE};
-        SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_finished, NULL, &rect_button_finished);
-
-        const int line_max_height = CELL_SIZE * 7;
+        const int line_max_height = CELL_SIZE * 6.5;
         int line_height = line_max_height * sudoku_tab.cell_fill / sudoku_tab.empty_cell_init;
-        SDL_Rect rect_jauge_progression = {(GRID_SIZE + MENU_SIZE / 2) - 2, CELL_SIZE * 8 - line_height, 5, line_height};
+        SDL_Rect rect_jauge_progression = {(GRID_SIZE + MENU_SIZE / 2) - 2, CELL_SIZE * 7.5 - line_height, 5, line_height};
         SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 255, 0, 255);
         SDL_RenderFillRect(sudoku_tab.renderer, &rect_jauge_progression);
 
