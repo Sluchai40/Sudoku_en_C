@@ -27,5 +27,4 @@ void init_graphics(sudoku *sudoku_tab)
     button_start(sudoku_tab);
     button_finished(sudoku_tab);
     cat_sprite(sudoku_tab);
-    animated_cat(sudoku_tab);
 }

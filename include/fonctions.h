@@ -40,6 +40,7 @@ typedef struct s_sudoku
     int almost_starting;
     int clean_number;
     int count;
+    int cat;
 
     time_t time;
 
@@ -96,9 +97,8 @@ void button_start(sudoku *sudoku_tab);
 
 void button_finished(sudoku *sudoku_tab);
 
-void animated_cat(sudoku *sudoku_tab);
-
 void cat_sprite(sudoku *sudoku_tab);
-void animated_cat(sudoku *sudoku_tab);
+
+void animated_cat(sudoku *sudoku_tab, int y);
 
 #endif

@@ -40,6 +40,7 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab->clean_number = 15;
                     init_sudoku(sudoku_tab);
                     sudoku_tab->almost_starting = 3;
+                    sudoku_tab -> cat = 1;
                 }
 
                 if (SDL_PointInRect(&point_click, &level_two) == SDL_TRUE && sudoku_tab->almost_starting == 1)
@@ -48,6 +49,7 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab->clean_number = 30;
                     init_sudoku(sudoku_tab);
                     sudoku_tab->almost_starting = 4;
+                    sudoku_tab -> cat = 1;
                 }
 
                 if (SDL_PointInRect(&point_click, &level_three) == SDL_TRUE && sudoku_tab->almost_starting == 1)
@@ -56,6 +58,7 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab->clean_number = 45;
                     init_sudoku(sudoku_tab);
                     sudoku_tab->almost_starting = 5;
+                    sudoku_tab -> cat = 1;
                 }
 
                 if (SDL_PointInRect(&point_click, &level_four) == SDL_TRUE && sudoku_tab->almost_starting == 1)
@@ -64,6 +67,7 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab->clean_number = 60;
                     init_sudoku(sudoku_tab);
                     sudoku_tab->almost_starting = 6;
+                    sudoku_tab -> cat = 1;
                 }
 
                 if (SDL_PointInRect(&point_click, &level_five) == SDL_TRUE && sudoku_tab->almost_starting == 1)
@@ -72,6 +76,7 @@ void event(sudoku *sudoku_tab, int *isOpen)
                     sudoku_tab->clean_number = 75;
                     init_sudoku(sudoku_tab);
                     sudoku_tab->almost_starting = 7;
+                    sudoku_tab -> cat = 1;
                 }
 
                 if (SDL_PointInRect(&point_click, &rect_button) == SDL_TRUE && sudoku_tab->almost_starting == 0 && !test)
@@ -81,7 +86,10 @@ void event(sudoku *sudoku_tab, int *isOpen)
 
                 if (sudoku_tab->game_finished > 0 && SDL_PointInRect(&point_click, &new_game) == SDL_TRUE && !test)
                 {
-                    sudoku_tab->almost_starting = 1;
+                    sudoku_tab->almost_starting = 0;
+                    sudoku_tab->cell_fill = 0;
+                    sudoku_tab->game_finished = 0;
+                    sudoku_tab->time = time(NULL);
                 }
 
                 if (sudoku_tab->game_finished > 0 && SDL_PointInRect(&point_click, &try_again) == SDL_TRUE)

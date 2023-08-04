@@ -119,13 +119,21 @@ int main(int ac, char **av)
             SDL_RenderCopy(sudoku_tab.renderer, sudoku_tab.button_finished, NULL, &rect_button_finished);
         }
 
-        // const int line_max_height = CELL_SIZE * 6.5;
-        // int line_height = line_max_height * sudoku_tab.cell_fill / sudoku_tab.empty_cell_init;
-        // SDL_Rect rect_jauge_progression = {(GRID_SIZE + MENU_SIZE / 2) - 2, CELL_SIZE * 7.5 - line_height, 5, line_height};
-        // SDL_SetRenderDrawColor(sudoku_tab.renderer, 0, 255, 0, 255);
-        // SDL_RenderFillRect(sudoku_tab.renderer, &rect_jauge_progression);
-        animated_cat(&sudoku_tab);
-        sudoku_tab.count++;
+        // if (sudoku_tab.cat == 1)
+        // { 
+        //     sudoku_tab.count++;
+        //     int line_max_height = CELL_SIZE * 6.5;
+        //     int line_height = line_max_height * sudoku_tab.cell_fill / sudoku_tab.empty_cell_init;
+        //     animated_cat(&sudoku_tab, CELL_SIZE * 6.5 - line_height);
+        // }
+
+        if (sudoku_tab.cat == 1)
+        { 
+            sudoku_tab.count++;
+            int line_max_height = CELL_SIZE * 6.5;
+            int line_height = line_max_height * sudoku_tab.cell_fill / sudoku_tab.empty_cell_init;
+            animated_cat(&sudoku_tab, CELL_SIZE * 6.5 - line_height);
+        }
 
         for (int x = 0; x < 9; x++)
         {
